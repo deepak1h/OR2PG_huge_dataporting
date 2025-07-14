@@ -1,0 +1,108 @@
+## installing oracle DB on docker ubuntu
+
+//install docker
+
+sudo snap install docker
+
+//login in oracle by entering user id and password of oracle account
+
+sudo docker login container-registry.oracle.com
+
+// pull the docker container for oracle
+
+sudo docker pull container-registry.oracle.com/database/enterprise:21.3.0.0
+
+
+//run the container wait till you get DATABASE IS READY TO USE
+//check sudo docker logs -f oracle-db
+
+
+sudo docker run -d --name oracle-db \
+  -p 1521:1521 -p 5500:5500 \
+  -e ORACLE_PWD=YourPassword123 \
+  -e ORACLE_CHARACTERSET=AL32UTF8 \
+  container-registry.oracle.com/database/enterprise:21.3.0.0
+
+//configuration  
+
+| Setting            | Value                   |
+| ------------------ | ----------------------- |
+| Hostname           | `localhost`             |
+| Port               | `1521`                  |
+| Container DB (CDB) | `ORCLCDB`               |
+| Pluggable DB (PDB) | `ORCLPDB1` or `XEPDB1`  |
+| Username           | `sys` or `system`       |
+| Password           | `YourPassword123`       |
+| Connection string  | `localhost:1521/XEPDB1` |
+
+
+// Connect with SQL*Plus (inside container)
+
+sudo docker exec -it oracle-db bash    //start docker bash
+source /home/oracle/.bashrc             // activate env
+sqlplus sys/YourPassword123@//localhost:1521/XEPDB1 as sysdba   //start SQl query  SQL>
+
+
+//create user 
+
+-- Create a new user
+CREATE USER myuser IDENTIFIED BY mypassword;
+
+-- Grant privileges
+GRANT CONNECT, RESOURCE TO myuser;
+
+-- Connect as the new user
+CONNECT myuser/mypassword@//localhost:1521/ORCLPDB1;
+
+
+| Setting          | Value                 |
+| ---------------- | --------------------- |
+| **Hostname**     | `localhost`           |
+| **Port**         | `1521`                |
+| **Service Name** | `ORCLPDB1`            |
+| **Username**     | `system` or your user |
+| **Password**     | `YourPassword123`     |
+
+
+// for acessing to GUI install Dbeaver
+
+
+config for creating new connection Important: Set Connection Type to "Service" (not SID)
+In DBeaver's Driver Properties tab:
+
+Set Connection Type to Basic
+
+Leave SID empty
+
+Use Service name: orclpdb1
+
+
+| Field            | Value                         |
+| ---------------- | ----------------------------- |
+| **Host**         | `localhost`                   |
+| **Port**         | `1521`                        |
+| **Service name** | `orclpdb1`                    |
+| **Username**     | `system`                      |
+| **Password**     | `YourPassword123`             |
+
+
+____________________________________________________________________
+
+start DB basic HR DB
+
+git clone https://github.com/oracle/db-sample-schemas.git
+cd db-sample-schemas
+sudo docker cp db-sample-schemas oracle-db:/home/oracle/
+sudo docker exec -it oracle-db bash
+source /home/oracle/.bashrc
+cd /home/oracle/db-sample-schemas/human_resource
+sqlplus sys/YourPassword123@//localhost:1521/orclpdb1 as sysdba
+
+
+ALTER SESSION SET CONTAINER = orclpdb1;
+ALTER USER hr IDENTIFIED BY hr ACCOUNT UNLOCK;
+@hr_install.sql   //it will install schema and populate the data tablespace empty and passowrd you need to add  'hr' 
+
+
+
+

@@ -1,0 +1,36 @@
+
+
+
+# Pull the PostgreSQL Docker Image
+
+sudo docker pull postgres:16
+
+
+//Run the PostgreSQL Container
+sudo docker run -d \
+  --name pg-db \
+  -e POSTGRES_USER=admin \
+  -e POSTGRES_PASSWORD=admin123 \
+  -e POSTGRES_DB=mydb \
+  -p 5432:5432 \
+  postgres:16
+
+
+//Test the Connection
+//You can now connect to Postgres using:
+
+| Field    | Value       |
+| -------- | ----------- |
+| Host     | `localhost` |
+| Port     | `5432`      |
+| Database | `mydb`      |
+| Username | `admin`     |
+| Password | `admin123`  |
+
+
+Servers
+ └── Local PostgreSQL (Docker)
+     └── Databases
+         └── mydb
+             └── Schemas > Tables
+
