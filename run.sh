@@ -1,1 +1,0 @@
-python code.py oracle --tables COUNTRIES EMPLOYEES JOBS LOCATIONS REGIONS 

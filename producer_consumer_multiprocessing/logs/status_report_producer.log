@@ -1,0 +1,9 @@
+timestamp,schema_name,table_name,oracle_rows,oracle_cols,postgres_rows,postgres_cols,status,details
+2025-07-08 12:49:55,GST_REGISTRATION,GST_RET_R1_B2B_INV,,,,,FAILED,Error during table replication process.
+2025-07-08 17:45:15,GST_REGISTRATION,GST_RET_R1_B2B_INV,,,,,FAILED,Error during table replication process.
+2025-07-08 17:45:15,GST_REGISTRATION,GST_RET_R1_B2B_INV_ITEM_DTLS,,,,,FAILED,Error during table replication process.
+2025-07-08 17:49:19,GST_REGISTRATION,GST_RET_R1_B2B_INV,,,,,FAILED,Error during table replication process.
+2025-07-08 17:49:19,GST_REGISTRATION,GST_RET_R1_B2B_INV_ITEM_DTLS,,,,,FAILED,Error during table replication process.
+2025-07-08 22:56:37,GST_REGISTRATION,GST_RET_R1_B2B_INV,1776637493,22,-1,-1,FAILED - MISMATCH,"Count mismatch! Oracle(1776637493R, 22C) vs Postgres(-1R, -1C)"
+2025-07-08 22:56:38,GST_REGISTRATION,GST_RET_R1_B2B_INV_ITEM_DTLS,,,,,FAILED,Error during table replication process.
+2025-07-14 21:41:17,GST_REGISTRATION,GST_RET_R1_B2B_INV_ITEM_DTLS,2538634166,11,-1,-1,FAILED - MISMATCH,"Count mismatch! Oracle(2538634166R, 11C) vs Postgres(-1R, -1C)"

@@ -1,0 +1,1 @@
+python test_migration.py oracle --tables COUNTRIES EMPLOYEES JOBS LOCATIONS REGIONS 
