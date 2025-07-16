@@ -208,7 +208,7 @@ def replicate_table(source_conn, pg_conn, table_name, chunk_size, source_db_type
     # Construct the SELECT statement for the source table
     # Quote column names to handle special characters or reserved words
     source_cols = ', '.join([f'"{col[0]}"' for col in columns])
-    
+    select_query=""
     # Oracle and newer SQL Server support OFFSET/FETCH for pagination
     if source_db_type == 'oracle':
         # Oracle requires an ORDER BY for OFFSET FETCH

@@ -1,2 +1,4 @@
 ./venv
 /producer_consumer_multiprocessing/config_multiprocessing.ini
+/producer_consumer_multithreading/config.ini
+/streaming_approach/config.ini
